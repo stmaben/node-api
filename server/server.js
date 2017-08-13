@@ -18,7 +18,7 @@ app.post('/todos', (req, res) => {
      todo.save().then((doc) => {
         res.status(200).send(doc);
      } , (e) => {
-        console.log("Some error arose while tring to save the Todo", e);
+        //console.log("Some error arose while tring to save the Todo", e);
         res.status(400).send(e);
     });
 });
