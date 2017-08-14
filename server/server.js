@@ -21,7 +21,7 @@ app.post('/todos', (req, res) => {
         //console.log("Some error arose while tring to save the Todo", e);
         res.status(400).send(e);
     });
-});
+}); 
 
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
@@ -35,7 +35,7 @@ app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
 
     if(!ObjectID.isValid(id)){
-        console.log(`Id:[${id}] is not valid!`);
+        // console.log(`Id:[${id}] is not valid!`);
         return res.status(404).send();
     }
 
@@ -43,11 +43,11 @@ app.get('/todos/:id', (req, res) => {
         if(!todo){
           return res.status(404).send();
         }
-        console.log(JSON.stringify(todo));
+        // console.log(JSON.stringify(todo));
         res.status(200).send({todo});
         
     }).catch((e) => {
-        console.log(e);
+        //console.log(e);
         return res.status(400).send();
     }); 
 });
