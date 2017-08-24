@@ -1,6 +1,8 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var {ObjectID} = require('mongodb');
+
+const _ = require('lodash');
+const express = require('express');
+const bodyParser = require('body-parser');
+const {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
@@ -24,6 +26,18 @@ app.post('/todos', (req, res) => {
         res.status(400).send(e);
     });
 }); 
+
+app.post('/users', (req, res) => {
+    console.log(req.body);
+    var body = _.pick(req.body, ['email','password']); 
+    var user = new User(body);
+
+    user.save().then((user) => {
+        res.status(200).send(user);
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+});
 
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
